@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TagDragView">
+        <attr name="tagDragViewText" format="string|reference"/>
+        <attr name="tagDragViewTextColor" format="color|reference"/>
+        <attr name="tagDragViewTextSize" format="dimension|reference"/>
+        <attr name="tagDragViewTextPaddingLeft" format="dimension|reference"/>
+        <attr name="tagDragViewTextPaddingRight" format="dimension|reference"/>
+        <attr name="circleBackground" format="color|reference"/>
+        <attr name="contentBackground" format="color|reference"/>
+        <attr name="triangleWidth" format="dimension|reference"/>
+        <attr name="circleRadius" format="dimension|reference"/>
+        <attr name="innerCircleRadius" format="dimension|reference"/>
+    </declare-styleable>
+</resources>

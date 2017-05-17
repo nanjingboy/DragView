@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorTagDragViewText">@android:color/white</color>
+    <color name="colorTagDragViewCircleBackground">@android:color/white</color>
+    <color name="colorTagDragViewContentBackgroundColor">@android:color/black</color>
+</resources>

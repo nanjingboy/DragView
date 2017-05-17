@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tagDragViewTextSize">10sp</dimen>
+    <dimen name="tagDragViewTextPaddingLeft">1dp</dimen>
+    <dimen name="tagDragViewTextPaddingRight">1dp</dimen>
+    <dimen name="tagDragViewTriangleWidth">10dp</dimen>
+    <dimen name="tagDragViewCircleRadius">5dp</dimen>
+    <dimen name="tagDragViewInnerCircleRadius">1dp</dimen>
+</resources>
