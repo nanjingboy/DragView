@@ -39,6 +39,7 @@ public class DragView extends View {
                 setLayoutParams(layoutParams);
                 break;
         }
+        bringToFront();
         parent.invalidate();
         return true;
     }
