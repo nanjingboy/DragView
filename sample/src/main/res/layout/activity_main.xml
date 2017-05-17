@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+    <me.tom.dragview.DragViewLayout
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
@@ -26,5 +26,5 @@
             app:tagDragViewTextPaddingRight="@dimen/tagDragViewTextPaddingRight"
             app:arrowOrientation="left"
             app:tagDragViewText="This is TagDragView"/>
-    </RelativeLayout>
+    </me.tom.dragview.DragViewLayout>
 </RelativeLayout>
