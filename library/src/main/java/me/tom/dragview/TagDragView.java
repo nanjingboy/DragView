@@ -11,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
 
 public class TagDragView extends DragView {
 
@@ -229,5 +231,17 @@ public class TagDragView extends DragView {
         } else {
             canvas.drawText(text, mTextPaddingLeft, (int) (mTextRect.height() * 1.5), mTextPaint);
         }
+    }
+
+    @Override
+    protected int[] parseMargin(MotionEvent event, ViewGroup parent) {
+        int[] margins = super.parseMargin(event, parent);
+        int maxHorizontalMargin = parent.getWidth() - parent.getPaddingLeft() - parent.getPaddingRight() - getWidth();
+        if (margins[0] == 0) {
+            mArrowOrientation = ARROW_ORIENTATION_LEFT;
+        } else if (margins[0] == maxHorizontalMargin) {
+            mArrowOrientation = ARROW_ORIENTATION_RIGHT;
+        }
+        return margins;
     }
 }
