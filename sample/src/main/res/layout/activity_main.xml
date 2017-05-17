@@ -24,6 +24,7 @@
             app:tagDragViewTextSize="@dimen/tagDragViewTextSize"
             app:tagDragViewTextPaddingLeft="@dimen/tagDragViewTextPaddingLeft"
             app:tagDragViewTextPaddingRight="@dimen/tagDragViewTextPaddingRight"
+            app:arrowOrientation="left"
             app:tagDragViewText="This is TagDragView"/>
     </RelativeLayout>
 </RelativeLayout>

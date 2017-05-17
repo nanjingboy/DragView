@@ -11,5 +11,9 @@
         <attr name="triangleWidth" format="dimension|reference"/>
         <attr name="circleRadius" format="dimension|reference"/>
         <attr name="innerCircleRadius" format="dimension|reference"/>
+        <attr name="arrowOrientation" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>

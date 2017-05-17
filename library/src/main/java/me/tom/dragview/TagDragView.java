@@ -14,6 +14,11 @@ import android.util.AttributeSet;
 
 public class TagDragView extends DragView {
 
+    public static final int ARROW_ORIENTATION_LEFT = 0;
+    public static final int ARROW_ORIENTATION_RIGHT = 1;
+
+    protected int mArrowOrientation;
+
     protected String mText;
     protected int mTextSize;
     protected int mTextColor;
@@ -29,6 +34,7 @@ public class TagDragView extends DragView {
 
     protected Paint mCirclePaint;
     protected Paint mContentPaint;
+
     protected TextPaint mTextPaint;
 
     protected Path mPath;
@@ -64,6 +70,7 @@ public class TagDragView extends DragView {
 
         Resources resources = getResources();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TagDragView);
+        mArrowOrientation = typedArray.getInt(R.styleable.TagDragView_arrowOrientation, ARROW_ORIENTATION_LEFT);
         mText = typedArray.getString(R.styleable.TagDragView_tagDragViewText);
         mTextSize = typedArray.getDimensionPixelSize(
                 R.styleable.TagDragView_tagDragViewTextSize,
@@ -129,6 +136,11 @@ public class TagDragView extends DragView {
         invalidate();
     }
 
+    public void setArrowOrientation(int arrowOrientation) {
+        mArrowOrientation = arrowOrientation;
+        invalidate();
+    }
+
     public void setText(String text) {
         mText = text;
         invalidate();
@@ -157,28 +169,65 @@ public class TagDragView extends DragView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        mCirclePaint.setColor(mCircleBackgroundColor);
+        mContentPaint.setColor(mContentBackgroundColor);
+        mTextPaint.setColor(mTextColor);
+        mTextPaint.setTextSize(mTextSize);
+        drawCircle(canvas);
+        drawTriangle(canvas);
+        drawText(canvas);
+    }
+
+    protected void drawCircle(Canvas canvas) {
+        int offsetX;
+        int offsetY = getHeight() / 2;
+        if (mArrowOrientation == ARROW_ORIENTATION_LEFT) {
+            offsetX = mCircleRadius;
+        } else {
+            offsetX = getWidth() - mCircleRadius;
+        }
+        canvas.drawCircle(offsetX, offsetY, mCircleRadius, mCirclePaint);
+        canvas.drawCircle(offsetX, offsetY, mInnerCircleRadius, mContentPaint);
+    }
+
+    protected void drawTriangle(Canvas canvas) {
+        int height = getHeight();
+        int centerY = height / 2;
+        mPath.reset();
+        if (mArrowOrientation == ARROW_ORIENTATION_LEFT) {
+            mPath.moveTo(mCircleRadius, centerY);
+            mPath.lineTo(mCircleRadius + mTriangleWidth, 0);
+            mPath.lineTo(mCircleRadius + mTriangleWidth, height);
+            mPath.close();
+            canvas.drawPath(mPath, mContentPaint);
+        } else {
+            int width = getWidth();
+            mPath.moveTo(width - mCircleRadius, centerY);
+            mPath.lineTo(width - mCircleRadius - mTriangleWidth, 0);
+            mPath.lineTo(width - mCircleRadius - mTriangleWidth, height);
+            mPath.close();
+            canvas.drawPath(mPath, mContentPaint);
+        }
+    }
+
+    protected void drawText(Canvas canvas) {
         int width = getWidth();
         int height = getHeight();
-        int halfHeight = height / 2;
-
-        mCirclePaint.setColor(mCircleBackgroundColor);
-        canvas.drawCircle(mCircleRadius, halfHeight, mCircleRadius, mCirclePaint);
-        mContentPaint.setColor(mContentBackgroundColor);
-        canvas.drawCircle(mCircleRadius, halfHeight, mInnerCircleRadius, mContentPaint);
-
-        mPath.moveTo(mCircleRadius, halfHeight);
-        mPath.lineTo(halfHeight + mTriangleWidth, 0);
-        mPath.lineTo(halfHeight + mTriangleWidth, height);
-        mPath.close();
-        canvas.drawPath(mPath, mContentPaint);
-        canvas.drawRect(halfHeight + mTriangleWidth, 0, width, height, mContentPaint);
-        if (mText != null && mText.length() > 0) {
-            mTextPaint.setColor(mTextColor);
-            mTextPaint.setTextSize(mTextSize);
-            int availableTextWidth = width - halfHeight - mTriangleWidth - mTextPaddingLeft - mTextPaddingRight;
-            String text = TextUtils.ellipsize(mText, mTextPaint, availableTextWidth, TextUtils.TruncateAt.END).toString();
-            mTextPaint.getTextBounds(text, 0, text.length(), mTextRect);
-            canvas.drawText(text, halfHeight + mTriangleWidth, (int) (mTextRect.height() * 1.5), mTextPaint);
+        if (mArrowOrientation == ARROW_ORIENTATION_LEFT) {
+            canvas.drawRect(mCircleRadius + mTriangleWidth, 0, width, height, mContentPaint);
+        } else {
+            canvas.drawRect(0, 0, width - mCircleRadius - mTriangleWidth, height, mContentPaint);
+        }
+        if (mText == null || mText.length() == 0) {
+            return;
+        }
+        int availableTextWidth = width -  mCircleRadius - mTriangleWidth - mTextPaddingLeft - mTextPaddingRight;
+        String text = TextUtils.ellipsize(mText, mTextPaint, availableTextWidth, TextUtils.TruncateAt.END).toString();
+        mTextPaint.getTextBounds(text, 0, text.length(), mTextRect);
+        if (mArrowOrientation == ARROW_ORIENTATION_LEFT) {
+            canvas.drawText(text, mCircleRadius + mTriangleWidth + mTextPaddingLeft, (int) (mTextRect.height() * 1.5), mTextPaint);
+        } else {
+            canvas.drawText(text, mTextPaddingLeft, (int) (mTextRect.height() * 1.5), mTextPaint);
         }
     }
 }
