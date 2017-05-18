@@ -16,5 +16,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".BasicDemoActivity"/>
+        <activity android:name=".ImageComposeDemoActivity"/>
     </application>
 </manifest>
