@@ -227,9 +227,19 @@ public class TagDragView extends DragView {
         String text = TextUtils.ellipsize(mText, mTextPaint, availableTextWidth, TextUtils.TruncateAt.END).toString();
         mTextPaint.getTextBounds(text, 0, text.length(), mTextRect);
         if (mArrowOrientation == ARROW_ORIENTATION_LEFT) {
-            canvas.drawText(text, mCircleRadius + mTriangleWidth + mTextPaddingLeft, (int) (mTextRect.height() * 1.5), mTextPaint);
+            canvas.drawText(
+                    text,
+                    mCircleRadius + mTriangleWidth + mTextPaddingLeft,
+                    (int) (height / 2 - (mTextPaint.descent() + mTextPaint.ascent()) / 2),
+                    mTextPaint
+            );
         } else {
-            canvas.drawText(text, mTextPaddingLeft, (int) (mTextRect.height() * 1.5), mTextPaint);
+            canvas.drawText(
+                    text,
+                    mTextPaddingLeft,
+                    (int) (height / 2 - (mTextPaint.descent() + mTextPaint.ascent()) / 2),
+                    mTextPaint
+            );
         }
     }
 
