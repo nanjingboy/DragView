@@ -25,7 +25,6 @@ public class DragView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        ViewGroup parent = (ViewGroup) getParent();
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
@@ -33,14 +32,13 @@ public class DragView extends View {
                 mYDelta = (int) event.getRawY() - layoutParams.topMargin;
                 break;
             case MotionEvent.ACTION_MOVE:
-                int[] margins = parseMargin(event, parent);
+                int[] margins = parseMargin(event, (ViewGroup) getParent());
                 layoutParams.leftMargin = margins[0];
                 layoutParams.topMargin = margins[1];
                 setLayoutParams(layoutParams);
                 break;
         }
         bringToFront();
-        parent.invalidate();
         return true;
     }
 
