@@ -24,17 +24,15 @@ public class TagView extends TagDragView {
 
     @Override
     protected int[] parseMargin(MotionEvent event, ViewGroup parent) {
-        int[] margins = super.parseMargin(event, parent);
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
         int[] locations = new int[2];
         ImageView imageView = (ImageView) parent.getChildAt(0);
         imageView.getLocationOnScreen(locations);
         if (x >= locations[0] && x<= locations[0] + imageView.getWidth() && y >= locations[1] && y <= locations[1] + imageView.getHeight()) {
-            return margins;
-
+            return super.parseMargin(event, parent);
         }
         mArrowOrientation = ARROW_ORIENTATION_LEFT;
-        return margins;
+        return super.parseMargin(event, parent);
     }
 }
