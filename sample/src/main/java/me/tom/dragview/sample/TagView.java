@@ -25,6 +25,7 @@ public class TagView extends TagDragView {
 
     @Override
     protected int[] parseMargin(MotionEvent event, ViewGroup parent) {
+        destroyDrawingCache();
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
         int[] locations = new int[2];
