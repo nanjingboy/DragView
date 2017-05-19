@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<me.tom.dragview.DragViewLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="254dp"
-    android:paddingBottom="10dp"
-    android:background="@android:color/darker_gray">
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Composed Image To File"/>
+    <me.tom.dragview.DragViewLayout
+        android:id="@+id/dragViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="254dp"
+        android:paddingBottom="10dp"
+        android:background="@android:color/darker_gray">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/demo"/>
+        <me.tom.dragview.sample.TagView
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="210dp"
+            app:tagDragViewText="Tag A"/>
+
+        <me.tom.dragview.sample.TagView
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="210dp"
+            app:tagDragViewText="Tag B"/>
+        <me.tom.dragview.sample.TagView
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginLeft="220dp"
+            app:tagDragViewText="Tag C"/>
+    </me.tom.dragview.DragViewLayout>
+
     <ImageView
+        android:id="@+id/resultImageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/demo"/>
-    <me.tom.dragview.sample.TagView
-        android:layout_width="100dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="210dp"
-        app:tagDragViewText="Tag A"/>
-
-    <me.tom.dragview.sample.TagView
-        android:layout_width="100dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="210dp"
-        app:tagDragViewText="Tag B"/>
-    <me.tom.dragview.sample.TagView
-        android:layout_width="100dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="210dp"
-        android:layout_marginLeft="220dp"
-        app:tagDragViewText="Tag C"/>
-</me.tom.dragview.DragViewLayout>
+        android:scaleType="fitXY"/>
+</LinearLayout>

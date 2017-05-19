@@ -20,6 +20,7 @@ public class TagView extends TagDragView {
 
     public TagView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setDrawingCacheEnabled(true);
     }
 
     @Override
